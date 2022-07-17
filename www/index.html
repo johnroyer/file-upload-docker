@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>上傳工具</title>
+        <link href="https://releases.transloadit.com/uppy/v1.29.1/uppy.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <script src="https://releases.transloadit.com/uppy/v1.29.1/uppy.min.js"></script>
+        <div id="drag-drop-area" style="width: 700px; margin: 30px auto;" ></div>
+
+        <script>
+            var uppy = Uppy.Core()
+
+            uppy
+                .use(Uppy.Dashboard, {
+                    trigger: '#select-files',
+                    inline: true,
+                    target: '#drag-drop-area'
+                })
+                .use(Uppy.XHRUpload, {
+                    endpoint: '/uploader/handler.php'
+                })
+            uppy.on('complete', (result) => {
+                console.log('Upload complete! We’ve uploaded these files:', result.successful)
+            })
+        </script>
+    </body>
+</html>
